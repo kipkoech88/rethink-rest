@@ -5,6 +5,7 @@ const dotenv = require("dotenv")
 const mongoose = require("mongoose")
 const logger = require("morgan")
 const path = require("path")
+const flash = require("express-flash")
 const errorHandler = require("errorhandler")
 const PORT = process.env.PORT || 5000
 const HomeRoute  = require("./routes/Home")
@@ -24,7 +25,8 @@ mongoose.connection.on('error', (err) => {
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 app.use(logger("dev"))
-app.set("views", path.join(__dirname, "views"))
+app.use(flash())
+//app.set("views", path.join(__dirname, "views"))
 
 app.use("/", HomeRoute);
 app.use("/blog", BlogRoutes);
@@ -36,7 +38,7 @@ if (process.env.NODE_ENV === 'development') {
   } else {
     app.use((err, req, res) => {
       console.error(err);
-      res.status(500).send('Server Error');
+      //res.status(500).send('Server Error');
     });
   }
   
