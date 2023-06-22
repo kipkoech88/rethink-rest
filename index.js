@@ -8,6 +8,7 @@ const path = require("path")
 const errorHandler = require("errorhandler")
 const PORT = process.env.PORT || 5000
 const HomeRoute  = require("./routes/Home")
+const BlogRoutes = require("./routes/Blogs")
 
 dotenv.config({path: ".env"})
 
@@ -20,11 +21,13 @@ mongoose.connection.on('error', (err) => {
 });
 
 //middlewares
+app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 app.use(logger("dev"))
 app.set("views", path.join(__dirname, "views"))
 
-app.use("/", HomeRoute)
+app.use("/", HomeRoute);
+app.use("/blog", BlogRoutes);
 
 //Error handler
 if (process.env.NODE_ENV === 'development') {
