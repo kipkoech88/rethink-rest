@@ -1,5 +1,7 @@
-const express = require("express")
-const route = express.Router()
+const express = require("express");
+const router = express.Router();
 const apiController = require('../controllers/api/blog')
 
-route.get('/', apiController.getIndex)
+router.get('/', apiController.getIndex)
+
+module.exports = router
