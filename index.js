@@ -7,7 +7,7 @@ const logger = require("morgan")
 const path = require("path")
 const errorHandler = require("errorhandler")
 const PORT = process.env.PORT || 5000
-const apiRoute  = require("./routes/api")
+const HomeRoute  = require("./routes/Home")
 
 dotenv.config({path: ".env"})
 
@@ -24,7 +24,7 @@ app.use(express.json())
 app.use(logger("dev"))
 app.set("views", path.join(__dirname, "views"))
 
-app.use("/", apiRoute)
+app.use("/", HomeRoute)
 
 //Error handler
 if (process.env.NODE_ENV === 'development') {
